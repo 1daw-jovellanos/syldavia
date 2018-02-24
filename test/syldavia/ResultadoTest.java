@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.lang.reflect.*;
+import java.util.Arrays;
 
 /**
  *
@@ -151,6 +153,46 @@ public class ResultadoTest {
         assertEquals("compareTo incorrecto", true, r4.compareTo(r2) < 0);
         assertEquals("compareTo incorrecto", true, r4.compareTo(r3) < 0);
         assertEquals("compareTo incorrecto", true, r4.compareTo(r4) == 0);
+    }
+
+    @Test
+    public void testEstructura() {
+        Class c = Resultado.class;
+
+        Field[] fields = c.getDeclaredFields();
+        //Contar variables de instancia y de clase
+        int totalFields = fields.length;
+        int numPrivateFields = 0;
+        int numStaticPrivateFields = 0;
+        for (Field f : fields) {
+            if (Modifier.isPrivate(f.getModifiers())) {
+                if (Modifier.isStatic(f.getModifiers())) {
+                    numStaticPrivateFields++;
+
+                } else {
+                    numPrivateFields++;
+                }
+            }
+        }
+
+        //Contar constructores
+        int numConstructors = c.getDeclaredConstructors().length;
+
+        //Contar métodos públicos
+        Method[] methods = c.getDeclaredMethods();
+        int numPublicMethods = 0;
+        for (Method m : methods) {
+            if (Modifier.isPublic(m.getModifiers())) {
+                numPublicMethods++;
+            }
+        }
+
+        assertEquals("Numero de variables de instancia o de clase no es el esperado", 4, totalFields);
+        assertEquals("Numero de variables de instancia PRIVADAS no es el esperado", 4, numPrivateFields);
+        assertEquals("Numero de variables de clase PRIVADAS no es el esperado", 0, numStaticPrivateFields);
+        assertEquals("Numero de constructures no es el esperado", 2, numConstructors);
+        assertEquals("Numero de métodos públicos no es el esperado", 7, numPublicMethods);
+
     }
 
 }
