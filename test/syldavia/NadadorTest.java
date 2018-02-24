@@ -1,5 +1,8 @@
 package syldavia;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -284,5 +287,46 @@ public class NadadorTest {
         n2.addResultado(r3);
         assertEquals(true, n2.hayLargaDistancia());   
     }
+    
+        @Test
+    public void testEstructura() {
+        Class c = Nadador.class;
+
+        Field[] fields = c.getDeclaredFields();
+        //Contar variables de instancia y de clase
+        int totalFields = fields.length;
+        int numPrivateFields = 0;
+        int numStaticPrivateFields = 0;
+        for (Field f : fields) {
+            if (Modifier.isPrivate(f.getModifiers())) {
+                if (Modifier.isStatic(f.getModifiers())) {
+                    numStaticPrivateFields++;
+
+                } else {
+                    numPrivateFields++;
+                }
+            }
+        }
+
+        //Contar constructores
+        int numConstructors = c.getDeclaredConstructors().length;
+
+        //Contar métodos públicos
+        Method[] methods = c.getDeclaredMethods();
+        int numPublicMethods = 0;
+        for (Method m : methods) {
+            if (Modifier.isPublic(m.getModifiers())) {
+                numPublicMethods++;
+            }
+        }
+
+        assertEquals("Numero de variables de instancia o de clase no es el esperado", 5, totalFields);
+        assertEquals("Numero de variables de instancia PRIVADAS no es el esperado", 4, numPrivateFields);
+        assertEquals("Numero de variables de clase PRIVADAS no es el esperado", 1, numStaticPrivateFields);
+        assertEquals("Numero de constructures no es el esperado", 1, numConstructors);
+        assertEquals("Numero de métodos públicos no es el esperado", 17, numPublicMethods);
+
+    }
+
     
 }
