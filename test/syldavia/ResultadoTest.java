@@ -36,11 +36,11 @@ public class ResultadoTest {
 
     @Before
     public void setUp() {
+        // Estos objetos están disponibles para todas las pruebas
         r1 = new Resultado(Estilo.BRAZA, 200, 244, 91);
         r2 = new Resultado(Estilo.MARIPOSA, 250, 283, 119);
         r3 = new Resultado(Estilo.ESPALDA, 250, 284, 119);
         r4 = new Resultado(500, 487, 222);
-
     }
 
     @After
@@ -52,7 +52,8 @@ public class ResultadoTest {
         boolean hayExcepcion;
         Resultado instance;
 
-        //Constructor de 4 params
+        // Comprobar que el constructor lanza excepciones. Empezamos con el de 4 params
+        // cuando el estilo es null
         hayExcepcion = false;
         try {
             instance = new Resultado(null, 100, 120, 50);
@@ -61,6 +62,7 @@ public class ResultadoTest {
         }
         assertEquals("Constructor no tiene en cuenta que estilo sea null", true, hayExcepcion);
 
+        // cuando el la distancia no es múltiplo de 25
         hayExcepcion = false;
         try {
             instance = new Resultado(Estilo.ESPALDA, 101, 120, 50);
@@ -69,6 +71,7 @@ public class ResultadoTest {
         }
         assertEquals("Constructor no tiene en cuenta que distancia no sea múltiplo de 25", true, hayExcepcion);
 
+        // Cuando tiempo es 0 
         hayExcepcion = false;
         try {
             instance = new Resultado(Estilo.ESPALDA, 100, 0, 50);
@@ -77,6 +80,7 @@ public class ResultadoTest {
         }
         assertEquals("Constructor no tiene en cuenta que tiempo sea 0", true, hayExcepcion);
 
+        // Cuando brazadas es 0 
         hayExcepcion = false;
         try {
             instance = new Resultado(Estilo.ESPALDA, 100, 120, 0);
@@ -85,6 +89,7 @@ public class ResultadoTest {
         }
         assertEquals("Constructor no tiene en cuenta que brazadas sea 0", true, hayExcepcion);
 
+        // Idem para el de 3 params
         hayExcepcion = false;
         try {
             instance = new Resultado(101, 120, 50);
@@ -113,6 +118,8 @@ public class ResultadoTest {
 
     @Test
     public void testAccesores() {
+        // Comprobar que los datos que salen de los objetos son los
+        // mismos que han entrado
         assertEquals(Estilo.BRAZA, r1.getEstilo());
         assertEquals(200, r1.getDistancia());
         assertEquals(244, r1.getTiempo());
@@ -126,7 +133,8 @@ public class ResultadoTest {
 
     @Test
     public void testSwolf() {
-
+        // comprobar que el SWOLF de cada resultado de prueba
+        // coincide con los valores calculados manualmente
         assertEquals("Cálculo de SWOLF incorrecto", 43, r1.getSwolf());
         assertEquals("Cálculo de SWOLF incorrecto", 41, r2.getSwolf());
         assertEquals("Cálculo de SWOLF incorrecto", 41, r3.getSwolf());
@@ -135,6 +143,8 @@ public class ResultadoTest {
 
     @Test
     public void testCompareTo() {
+        // Comparar todos los resultados con todos, y ver si
+        // el resultado es el esperado en todos los casos
         assertEquals("compareTo incorrecto", true, r1.compareTo(r1) == 0);
         assertEquals("compareTo incorrecto", true, r1.compareTo(r2) > 0);
         assertEquals("compareTo incorrecto", true, r1.compareTo(r3) > 0);
@@ -158,6 +168,11 @@ public class ResultadoTest {
 
     @Test
     public void testEstructura() {
+        /*
+          Comprobar la cantidad de variables de instancia, de clase, 
+          su visibilidad, y la cantidad de métodos  y constructores públicos.
+        */
+        
         Class c = Resultado.class;
 
         Field[] fields = c.getDeclaredFields();
