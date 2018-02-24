@@ -147,7 +147,7 @@ public class NadadorTest {
         assertEquals("Categoria incorrecta. Nadador de 25 años", CategoriaEdad.CLASS, n1.getCategoriaEdad());
         n1.setFechaNacimiento(LocalDate.of(thisYear - 26, Month.JUNE, 10)); // 26 años
         assertEquals("Categoria incorrecta. Nadador de 26 años", CategoriaEdad.MASTER, n1.getCategoriaEdad());
-        n1.setFechaNacimiento(LocalDate.of(thisYear - 44, Month.MAY, 1)); // 443 años
+        n1.setFechaNacimiento(LocalDate.of(thisYear - 44, Month.MAY, 1)); // 44 años
         assertEquals("Categoria incorrecta. Nadador de 44 años", CategoriaEdad.MASTER, n1.getCategoriaEdad());
         n1.setFechaNacimiento(LocalDate.of(thisYear - 444, Month.JUNE, 18)); // 443 años
         assertEquals("Categoria incorrecta. Nadador de 443 años", CategoriaEdad.MASTER, n1.getCategoriaEdad());
