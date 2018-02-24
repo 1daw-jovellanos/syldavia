@@ -15,8 +15,9 @@ import java.lang.reflect.*;
 import java.util.Arrays;
 
 /**
- *
+ * Pruebas unitarias de la clase Resultado
  * @author victor
+ * @version 2018-Feb-24.0
  */
 public class ResultadoTest {
 
