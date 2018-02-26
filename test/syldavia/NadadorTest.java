@@ -331,7 +331,7 @@ public class NadadorTest {
         assertEquals("Numero de variables de instancia PRIVADAS no es el esperado", 4, numPrivateFields);
         assertEquals("Numero de variables de clase PRIVADAS no es el esperado", 1, numStaticPrivateFields);
         assertEquals("Numero de constructures no es el esperado", 1, numConstructors);
-        assertEquals("Numero de métodos públicos no es el esperado", 17, numPublicMethods);
+        assertEquals("Numero de métodos públicos no es el esperado", 16, numPublicMethods);
 
     }
 
